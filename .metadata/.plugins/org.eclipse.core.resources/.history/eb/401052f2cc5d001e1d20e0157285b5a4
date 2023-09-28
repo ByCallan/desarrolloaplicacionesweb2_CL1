@@ -1,0 +1,35 @@
+package org.cibertec.edu.pe.service;
+
+@Service
+public class ProductoService implements IProductoService {
+
+	@Autowired
+	private IProducto data;
+
+	@Override
+	public List<Producto> list() {
+		return (List<Producto>)data.findAll();
+	}
+
+	@Override
+	public Optional<Producto> search(String id) {
+		return data.findById(id);
+	}
+
+	@Override
+	public int save(Producto p) {
+		int hasSaved = 0;
+		Producto dbProduct = data.save(p);
+		if(!dbProduct.equals(null)) hasSaved = -1;
+		return hasSaved;
+	}
+
+	@Override
+	public void delete(String id) {
+		data.deleteById(id);		
+		
+	}
+	
+	
+
+}
